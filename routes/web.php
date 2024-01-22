@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Login Controller
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.submit');
+
 Route::get('about', function () {
     // $about = 'This is about page';
     // $about2 = 'This is about page 2';
@@ -32,27 +38,7 @@ Route::get('users/{id}', function ($id) {
     return "This is user $id";
 })->name('edit-user');
 
-Route::get('home', function () {
-    $blogs = [
-        [
-            'title' => 'Blog 1',
-            'content' => 'This is blog 1 content',
-        ],
-        [
-            'title' => 'Blog 2',
-            'content' => 'This is blog 2 content',
-        ],
-        [
-            'title' => 'Blog 3',
-            'content' => 'This is blog 3 content',
-        ],
-        [
-            'title' => 'Blog 4',
-            'content' => 'This is blog 4 content',
-        ]
-    ];
-    return view('home', compact('blogs'));
-});
+Route::get('home', [HomeController::class, 'home']);
 
 Route::get('homes', function () {
     return "<a href='".route('edit-user','tin')."'>About</a>";
