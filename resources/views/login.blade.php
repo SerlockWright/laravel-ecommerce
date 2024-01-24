@@ -2,9 +2,16 @@
 @section('content')
     <div class="row mt-5 justify-content-center">
         <div class="col-md-4">
+            <h2>Login</h2>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                @endforeach
+            @endif
             <div class="card">
                 <div class="card-body">
-                    <h1>Login</h1>
                     <form action="{{ route('login.submit') }}" method="POST">
                         @csrf
                         <div class="mb-2">
